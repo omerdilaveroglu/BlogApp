@@ -1,22 +1,31 @@
+using System.Linq;
 using BlogApp.Data.Abstract;
-using BlogApp.Data.Concrate.EfCore;
 using BlogApp.Entity;
-using Microsoft.AspNetCore.Http;
+using BlogApp.Model; // PostsViewModel için gerekli
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApp.Controllers
 {
     public class PostsController : Controller
     {
-        private IRepository<Post> _repository;
+        private IRepository<Post> _postRepository;
+        private IRepository<Tag> _tagRepository;
 
-        public PostsController(IRepository<Post> repository)
+        public PostsController(IRepository<Post> postRepository, IRepository<Tag> tagRepository)
         {
-            _repository = repository;
+            _postRepository = postRepository;
+            _tagRepository = tagRepository;
         }
+
         public IActionResult Index()
         {
-            return View(_repository.Posts.ToList());
+            var viewModel = new PostsViewModel
+            {
+                Posts = _postRepository.Posts.ToList(),
+                Tags = _tagRepository.Posts.ToList() 
+            };
+            
+            return View(viewModel);
         }
     }
 }

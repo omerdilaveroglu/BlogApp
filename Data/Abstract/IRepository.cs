@@ -1,6 +1,5 @@
 using System;
 using BlogApp.Entity;
-
 namespace BlogApp.Data.Abstract;
 
 public interface IRepository<TEntity> where TEntity : class
