@@ -1,16 +1,16 @@
 using BlogApp.Data.Abstract;
 using BlogApp.Data.Concrate.EfCore;
+using BlogApp.Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApp.Controllers
 {
-
     public class PostsController : Controller
     {
-        private IPostRepository _repository;
+        private IRepository<Post> _repository;
 
-        public PostsController(IPostRepository repository)
+        public PostsController(IRepository<Post> repository)
         {
             _repository = repository;
         }

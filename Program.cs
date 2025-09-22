@@ -34,7 +34,7 @@ builder.Services.AddDbContext<BlogContext>(options =>
 // Bağımlılık Enjeksiyonu (Dependency Injection) için servislerimizi kaydediyoruz.
 // Her HTTP isteği için IPostRepository arayüzü istendiğinde,
 // EfPostRepository sınıfından yeni bir örnek oluşturulmasını sağlıyoruz.
-builder.Services.AddScoped<IPostRepository, EfPostRepository>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
 
 // Servisler ve ayarlar ile web uygulamasını oluşturuyoruz.
 var app = builder.Build();

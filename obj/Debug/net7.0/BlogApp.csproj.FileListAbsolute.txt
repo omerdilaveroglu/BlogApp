@@ -65,3 +65,4 @@
 /Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/obj/Debug/net7.0/ref/BlogApp.dll
 /Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/bin/Debug/net7.0/libman.json
 /Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/bin/Debug/net7.0/BlogApp.staticwebassets.runtime.json
+/Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/obj/Debug/net7.0/BlogApp.sourcelink.json
