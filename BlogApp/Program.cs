@@ -1,9 +1,15 @@
-using BlogApp.Data.Concrete.EfCore; // Doğru yazım
-using BlogApp.Data; 
+using BlogApp.Data.Concrete.EfCore; 
+using BlogApp.Data.Abstract; // IRepository ve IPostDal için eklendi
 using Microsoft.EntityFrameworkCore;
-using System.IO; 
+using System.IO;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure; // MySQL için eklendi
+using System; 
+using BlogApp.Data;
+using BlogApp.Data.Concrete; // SeedData için gerekli
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllersWithViews();
 
 // DbContext ayarları
 builder.Services.AddDbContext<BlogContext>(options =>
@@ -21,13 +27,15 @@ builder.Services.AddDbContext<BlogContext>(options =>
 
 });
 
+builder.Services.AddScoped<IPostDal, EfPostDal>();
 
 var app = builder.Build();
 
 // Veri doldurma (Seeding)
+// Not: SeedData.TestVerileriniDoldur metodu, IPostDal'a bağımlı olabilir.
 SeedData.TestVerileriniDoldur(app);
 
 
-app.MapGet("/", () => "Hello World!");
+app.MapDefaultControllerRoute();
 
 app.Run();
