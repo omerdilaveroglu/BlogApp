@@ -16,4 +16,10 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot/js/" />
+    <Folder Include="wwwroot/lib/" />
+    <Folder Include="wwwroot/lib/bootstrap/" />
+  </ItemGroup>
+
 </Project>
