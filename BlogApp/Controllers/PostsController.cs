@@ -1,8 +1,9 @@
 using System.Linq;
 using BlogApp.Data.Abstract;
 using BlogApp.Entity;
-using BlogApp.Model; 
+using BlogApp.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogApp.Controllers
 {
@@ -17,17 +18,33 @@ namespace BlogApp.Controllers
             _tagRepository = tagRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string? tag)
         {
-            var viewModel = new PostsViewModel
-            {
-                Posts = _postRepository.Items.ToList()
 
+            if (!string.IsNullOrEmpty(tag))
+            {
+                var taggedPosts = await _postRepository.Items
+                    .Where(p => p.Tags.Any(t => t.Text == tag))
+                    .ToListAsync();
+
+                var viewModel = new PostsViewModel
+                {
+                    Posts = taggedPosts
+                };
+
+                return View(viewModel);
+            }
+
+            var posts = await _postRepository.GetListAsync();
+
+            var allPostsViewModel = new PostsViewModel
+            {
+                Posts = posts 
             };
 
-            return View(viewModel);
+            return View(allPostsViewModel);
         }
-        
+
         public async Task<IActionResult> Details(string url)
         {
             var post = await _postRepository.GetAsync(p => p.Url == url);
