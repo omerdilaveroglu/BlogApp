@@ -47,7 +47,10 @@ namespace BlogApp.Controllers
 
         public async Task<IActionResult> Details(string url)
         {
-            var post = await _postRepository.GetAsync(p => p.Url == url);
+            var post = await _postRepository.Items
+                .Include(p => p.Tags) 
+                .FirstOrDefaultAsync(p => p.Url == url);
+
             if (post == null)
             {
                 return NotFound();

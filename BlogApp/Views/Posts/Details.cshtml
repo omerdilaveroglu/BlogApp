@@ -6,7 +6,11 @@
             <h1 class="h4 mb4">
                 @Model.Title
             </h1>
-            <a href="#" class="badge bg-primary bg-opacity-10 text-primary mb-2 fw-bold"> Web Development</a>
+            <div class="tags">
+                @foreach(var tag in Model.Tags){
+                    <a href="/post/tag/@tag.Url" class="badge bg-@tag.Color bg-opacity-10 text-@tag.Color mb-2 fw-bold">@tag.Text</a>
+                }
+            </div>
         </div>
         <img src="~/img/@Model.Image" class="img-fluid rounded" alt="">
         <p>
