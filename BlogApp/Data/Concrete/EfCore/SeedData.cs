@@ -28,11 +28,11 @@ public static class SeedData
             if (!context.Tags.Any())
             {
                 context.Tags.AddRange(
-                    new Tag { Text = "Web programlama" },
-                    new Tag { Text = "backend" },
-                    new Tag { Text = "Frontend" },
-                    new Tag { Text = "fullstack" },
-                    new Tag { Text = "php" }
+                    new Tag { Text = "Web programlama" , Url="web-programlama"},
+                    new Tag { Text = "backend" , Url="backend" },
+                    new Tag { Text = "Frontend" , Url="frontend" },
+                    new Tag { Text = "fullstack" , Url="fullstack" },
+                    new Tag { Text = "php" , Url="php" }
                 );
             }
 
@@ -52,33 +52,36 @@ public static class SeedData
             if (!context.Posts.Any())
             {
                 context.Posts.AddRange(
-                    new Entity.Post { 
-                        Title = "ASPNET Core", 
-                        Content = "AspNet core desleri", 
-                        IsActive = true, 
-                        PublishedOn = DateTime.Now.AddDays(-10), 
+                    new Entity.Post {
+                        Title = "ASPNET Core",
+                        Content = "AspNet core desleri",
+                        IsActive = true,
+                        PublishedOn = DateTime.Now.AddDays(-10),
                         // İlk 3 Tag'ı al. (Id'leri SaveChanges ile oluştu)
-                        Tags = context.Tags.Take(3).ToList(), 
-                        UserId = 1 ,
-                        Image = "1.jpg"
+                        Tags = context.Tags.Take(3).ToList(),
+                        UserId = 1,
+                        Image = "1.jpg",
+                        Url = "aspnet-core"
                     },
-                    new Entity.Post { 
-                        Title = "PHP", 
-                        Content = "PHP desleri", 
-                        IsActive = true, 
-                        PublishedOn = DateTime.Now.AddDays(-20), 
+                    new Entity.Post {
+                        Title = "PHP",
+                        Content = "PHP desleri",
+                        IsActive = true,
+                        PublishedOn = DateTime.Now.AddDays(-20),
                         Tags = context.Tags.Skip(1).Take(2).ToList(), // İkinci ve üçüncü Tag'ı al
-                        UserId = 2 ,
-                        Image = "2.jpg"
+                        UserId = 2,
+                        Image = "2.jpg",
+                        Url = "php"
                     },
-                    new Entity.Post { 
-                        Title = "Djongo", 
-                        Content = "Django core desleri", 
-                        IsActive = true, 
-                        PublishedOn = DateTime.Now.AddDays(-5), 
+                    new Entity.Post {
+                        Title = "Djongo",
+                        Content = "Django core desleri",
+                        IsActive = true,
+                        PublishedOn = DateTime.Now.AddDays(-5),
                         Tags = context.Tags.Skip(2).Take(3).ToList(), // Üçüncü, dördüncü ve beşinci Tag'ı al
                         UserId = 3,
-                        Image = "3.jpg" 
+                        Image = "3.jpg",
+                        Url = "django"
                     }
                 );
             }

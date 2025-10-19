@@ -39,6 +39,21 @@ var app = builder.Build();
 // Not: SeedData.TestVerileriniDoldur metodu, IPostDal'a bağımlı olabilir.
 SeedData.TestVerileriniDoldur(app);
 app.UseStaticFiles();
+
+
+app.MapControllerRoute(
+    name: "post_details",
+    pattern: "posts/{url}",
+
+    defaults: new { controller = "Posts", action = "Details" }
+);
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
+
+
 app.MapDefaultControllerRoute();
 
 app.Run();

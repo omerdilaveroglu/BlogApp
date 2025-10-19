@@ -22,6 +22,8 @@ namespace BlogApp.Migrations
                     TagId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Text = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Url = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -59,6 +61,8 @@ namespace BlogApp.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     PublishedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Image = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Url = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)

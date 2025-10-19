@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogApp.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20251012204357_InitialMigrations")]
+    [Migration("20251019154725_InitialMigrations")]
     partial class InitialMigrations
     {
         /// <inheritdoc />
@@ -77,6 +77,9 @@ namespace BlogApp.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Url")
+                        .HasColumnType("longtext");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -96,6 +99,10 @@ namespace BlogApp.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("TagId"));
 
                     b.Property<string>("Text")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("TagId");

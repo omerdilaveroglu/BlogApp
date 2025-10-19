@@ -8,6 +8,7 @@ public class Post
     public string? Content { get; set; }
     public DateTime PublishedOn { get; set; }
     public string? Image { get; set; }
+    public string? Url { get; set; }
 
     public bool IsActive { get; set; }
     public int UserId { get; set; }

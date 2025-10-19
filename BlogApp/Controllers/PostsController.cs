@@ -28,9 +28,9 @@ namespace BlogApp.Controllers
             return View(viewModel);
         }
         
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(string url)
         {
-            var post = await _postRepository.GetAsync(p => p.PostId == id);
+            var post = await _postRepository.GetAsync(p => p.Url == url);
             if (post == null)
             {
                 return NotFound();
