@@ -21,8 +21,8 @@ namespace BlogApp.Controllers
         {
             var viewModel = new PostsViewModel
             {
-                Posts = _postRepository.Items.ToList(),
-                Tags = _tagRepository.Items.ToList() 
+                Posts = _postRepository.Items.ToList()
+                
             };
             
             return View(viewModel);
