@@ -22,10 +22,20 @@ namespace BlogApp.Controllers
             var viewModel = new PostsViewModel
             {
                 Posts = _postRepository.Items.ToList()
-                
+
             };
-            
+
             return View(viewModel);
+        }
+        
+        public async Task<IActionResult> Details(int id)
+        {
+            var post = await _postRepository.GetAsync(p => p.PostId == id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return View(post);
         }
     }
 }

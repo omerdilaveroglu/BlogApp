@@ -36,6 +36,11 @@ public class EfRepository<T,TContext> : IRepository<T>
         return _context.Set<T>().Where(filter).FirstOrDefault();
     }
 
+    public Task<T?> GetAsync(Expression<Func<T, bool>> filter)
+    {
+        return _context.Set<T>().Where(filter).FirstOrDefaultAsync();
+    }
+
     public List<T> GetList(Expression<Func<T, bool>>? filter = null)
     {
         IQueryable<T> query = _context.Set<T>();

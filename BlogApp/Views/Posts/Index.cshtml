@@ -7,19 +7,19 @@
                 Popular Post
             </h1>
             @foreach(var post in Model.Posts){
-            <div class="card bg-transparent border-0 mb-3">
-                <div class="row">
-                    <div class="col-4">
-                        <img src="~/img/@post.Image" class="img-fluid rounded" alt="" width="200px" height="200px">
-                    </div>
-                    <div class="col-8">
-                        <h5><a href="#" class="btn-link fw-bold">@post.Title</a></h5>
-                        <p>@post.Content</p>
-                        <a href="#" class="badge bg-danger bg-opacity-10 text-danger mb-2 fw-bold"> Web Development</a>
+                <div class="card bg-transparent border-0 mb-3">
+                    <div class="row">
+                        <div class="col-4">
+                            <img src="~/img/@post.Image" class="img-fluid rounded" alt="" width="200px" height="200px">
+                        </div>
+                        <div class="col-8">
+                            <h5><a asp-action="Details" asp-route-id="@post.PostId" class="btn-link fw-bold">@post.Title</a></h5>
+                            <p>@post.Content</p>
+                            <a href="#" class="badge bg-danger bg-opacity-10 text-danger mb-2 fw-bold"> Web Development</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <hr class="my-3">
+                <hr class="my-3">
             }
             <nav>
                 <ul class="pagination">
@@ -34,6 +34,7 @@
     <div class="col-lg-4">
 
         <vc:tags-menu></vc:tags-menu>
+        <vc:new-posts></vc:new-posts>
 
     </div>
 </div>
