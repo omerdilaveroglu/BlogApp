@@ -11,11 +11,15 @@ namespace BlogApp.Controllers
     {
         private IRepository<Post> _postRepository;
         private IRepository<Tag> _tagRepository;
+        private IRepository<Comment> _commentRepository;
 
-        public PostsController(IRepository<Post> postRepository, IRepository<Tag> tagRepository)
+        public PostsController(IRepository<Post> postRepository,
+                                 IRepository<Tag> tagRepository,
+                                 IRepository<Comment> commentRepository)
         {
             _postRepository = postRepository;
             _tagRepository = tagRepository;
+            _commentRepository = commentRepository;
         }
 
         public async Task<IActionResult> Index(string? tag)
@@ -48,7 +52,9 @@ namespace BlogApp.Controllers
         public async Task<IActionResult> Details(string url)
         {
             var post = await _postRepository.Items
-                .Include(p => p.Tags) 
+                .Include(p => p.Tags)
+                .Include(p => p.Comments)
+                .ThenInclude(c => c.User)
                 .FirstOrDefaultAsync(p => p.Url == url);
 
             if (post == null)
@@ -56,6 +62,20 @@ namespace BlogApp.Controllers
                 return NotFound();
             }
             return View(post);
+        }
+
+        public IActionResult AddComment(int PostId,string UserName,string CommentText,string Url)
+        {
+            Comment entity = new Comment
+            {
+                CommentText = CommentText,
+                PublishedOn = DateTime.Now,
+                PostId = PostId,
+                User = new User { UserName = UserName, Image = "1.jpg" }
+            };
+            _commentRepository.Add(entity);
+
+            return Redirect("/posts/details/" + Url);
         }
     }
 }

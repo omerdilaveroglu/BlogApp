@@ -145,7 +145,6 @@
 /Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/obj/Debug/net9.0/rjsmrazor.dswa.cache.json
 /Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/obj/Debug/net9.0/rjsmcshtml.dswa.cache.json
 /Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/obj/Debug/net9.0/scopedcss/bundle/BlogApp.styles.css
-/Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/obj/Debug/net9.0/compressed/w2bw8qccko-f3wr7dtg3s.gz
 /Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/obj/Debug/net9.0/compressed/wu80p5z9kv-qagmcfajms.gz
 /Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/obj/Debug/net9.0/compressed/mpgst0vden-0c1d32ph4u.gz
 /Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/obj/Debug/net9.0/compressed/p6qx0br98z-gnxria04pl.gz
@@ -2282,3 +2281,4 @@
 /Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/obj/Debug/net9.0/BlogApp.pdb
 /Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/obj/Debug/net9.0/BlogApp.genruntimeconfig.cache
 /Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/obj/Debug/net9.0/ref/BlogApp.dll
+/Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/obj/Debug/net9.0/compressed/w2bw8qccko-7di4qzwncl.gz

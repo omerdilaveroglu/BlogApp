@@ -33,7 +33,7 @@ namespace BlogApp.Migrations
                     b.Property<string>("CommentText")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("PostsPostId")
+                    b.Property<int>("PostId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("PublishedOn")
@@ -44,7 +44,7 @@ namespace BlogApp.Migrations
 
                     b.HasKey("CommentId");
 
-                    b.HasIndex("PostsPostId");
+                    b.HasIndex("PostId");
 
                     b.HasIndex("UserId");
 
@@ -118,6 +118,9 @@ namespace BlogApp.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("UserId"));
 
+                    b.Property<string>("Image")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Text")
                         .HasColumnType("longtext");
 
@@ -148,7 +151,7 @@ namespace BlogApp.Migrations
                 {
                     b.HasOne("BlogApp.Entity.Post", "Posts")
                         .WithMany("Comments")
-                        .HasForeignKey("PostsPostId")
+                        .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

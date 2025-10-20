@@ -40,9 +40,9 @@ public static class SeedData
             if (!context.Users.Any())
             {
                 context.Users.AddRange(
-                    new User { UserName = "ozgetasdelen" },
-                    new User { UserName = "omerdilaveroglu" },
-                    new User { UserName = "durgaybaydemir" }
+                    new User { UserName = "ozgetasdelen" ,Image="1.jpg"},
+                    new User { UserName = "omerdilaveroglu" ,Image="2.jpg"},
+                    new User { UserName = "durgaybaydemir" ,Image="3.jpg"}
                 );
             }
             
@@ -61,7 +61,22 @@ public static class SeedData
                         Tags = context.Tags.Take(3).ToList(),
                         UserId = 1,
                         Image = "1.jpg",
-                        Url = "aspnet-core"
+                        Url = "aspnet-core",
+                        Comments = new List<Comment>
+                        {
+                            new Comment
+                            {
+                                CommentText = "Harika bir kurs olmuş!",
+                                PublishedOn = DateTime.Now.AddDays(-9),
+                                User = context.Users.First()
+                            },
+                            new Comment
+                            {
+                                CommentText = "Çok faydalı bilgiler edindim, teşekkürler.",
+                                PublishedOn = DateTime.Now.AddDays(-1),
+                                User = context.Users.Skip(1).First()
+                            },
+                        }
                     },
                     new Entity.Post {
                         Title = "PHP",
