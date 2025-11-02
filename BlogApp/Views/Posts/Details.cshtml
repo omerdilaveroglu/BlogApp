@@ -5,7 +5,6 @@
         <div class="bg-white p-4">
             <h1 class="h4 mb4">
                 @Model.Title
-            </h1>
             <div class="tags">
                 @foreach(var tag in Model.Tags){
                 <a href="/posts/tag/@tag.Url"
@@ -20,34 +19,33 @@
         <div class="bg-white mt-3">
             <div class="card border-0">
                 <div class="card header ">
-                    <h5>@Model.Comments.Count() Adet yorum.</h5>
+                    <h5><span id="commentCount"> @Model.Comments.Count() Adet yorum.</span></h5>
                 </div>
                 <div class="card-body">
-                    @foreach(var comment in Model.Comments)
-                    {
-                    <div class="my-4 d-flex">
-                        <img src="/img/@comment.User.Image" alt="" class="avatar rounded-circle float-start me-3">
-                        <div>
-                        <div class="mb-2 d-flex">
-                            <h6 class="me-2">@comment.User.UserName </h6>
-                            <small>@comment.PublishedOn.ToString("d")</small>
+                    <div id="comments">
+                        @foreach(var comment in Model.Comments)
+                        {
+                        <div class="my-4 d-flex">
+                            <img src="/img/@comment.User.Image" alt="" class="avatar rounded-circle float-start me-3">
+                            <div>
+                                <div class="mb-2 d-flex">
+                                    <h6 class="me-2">@comment.User.UserName </h6>
+                                    <small>@comment.PublishedOn.ToString("d")</small>
+                                </div>
+                                <p>@comment.CommentText</p>
+                            </div>
                         </div>
-                        <p>@comment.CommentText</p>
-                        </div>
-
+                        }
                     </div>
-                    }
-                    <div class="p-4 p-md-5 my-4 border rounded-3 bg-light shadow-lg">
 
+                    <div class="p-4 p-md-5 my-4 border rounded-3 bg-light shadow-lg">
                         <h4 class="mb-4 text-center text-secondary">
                             <i class="bi bi-chat-text-fill me-2"></i> Yorum Ekle
                         </h4>
                         <hr class="mb-4">
 
                         <form action="/posts/AddComment" method="post">
-
-                            <input type="hidden" name="PostId" value="@Model.PostId" />
-                            <input type="hidden" name="Url" id="url" value="@Model.Url">
+                            <input type="hidden" id="PostId" name="PostId" value="@Model.PostId" />
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="UserName" name="UserName"
                                     placeholder="Adınız" required>
@@ -61,7 +59,7 @@
                             </div>
 
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-success btn-lg">
+                                <button id="commentSave" type="submit" class="btn btn-success btn-lg">
                                     <i class="bi bi-send-fill me-2"></i> Yorumu Gönder
                                 </button>
                             </div>
@@ -83,6 +81,50 @@
     </div>
 </div>
 
-<h1>
 
-</h1>
+
+@section Scripts{
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
+    </script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#commentSave").click(function (e) {
+                $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddComment", "Posts")',
+                dataType: "json",
+                data: {
+                    PostId: $("#PostId").val(),
+                    UserName: $("#UserName").val(),
+                    CommentText: $("#CommentText").val()
+                },
+                success: function (comment) {
+                    var date = new Date(comment.publishedOn);
+                    comment.publishedOn = date.toLocaleDateString();
+                    $("#comments").append(`
+                        <div class="my-4 d-flex">
+                            <img src="/img/${comment.image}" alt="" class="avatar rounded-circle float-start me-3">
+                            <div>
+                                <div class="mb-2 d-flex">
+                                    <h6 class="me-2">${comment.userName} </h6>
+                                    <small>${comment.publishedOn}</small>
+                                </div>
+                                <p>${comment.commentText}</p>
+                            </div>
+                        </div>
+                    `);
+                    $("#UserName").val('');
+                    $("#CommentText").val('');
+
+                    var count = parseInt($("#commentCount").text());
+                    count += 1;
+                    $("#commentCount").text(count + " Adet yorum.");
+                }
+            });
+            return false;
+        });
+    }); 
+</script>
+}

@@ -43,7 +43,7 @@ namespace BlogApp.Controllers
 
             var allPostsViewModel = new PostsViewModel
             {
-                Posts = posts 
+                Posts = posts
             };
 
             return View(allPostsViewModel);
@@ -64,18 +64,33 @@ namespace BlogApp.Controllers
             return View(post);
         }
 
-        public IActionResult AddComment(int PostId,string UserName,string CommentText,string Url)
+        [HttpPost]
+        public JsonResult AddComment(int PostId, string UserName, string CommentText)
         {
+            User newUser = new User { UserName = UserName, Image = "1.jpg" };
+
             Comment entity = new Comment
             {
                 CommentText = CommentText,
                 PublishedOn = DateTime.Now,
                 PostId = PostId,
-                User = new User { UserName = UserName, Image = "1.jpg" }
+                User = newUser
             };
+
             _commentRepository.Add(entity);
 
-            return Redirect("/posts/details/" + Url);
+            Console.WriteLine(entity.User.UserName.ToString()
+            + Environment.NewLine + entity.CommentText.ToString() + Environment.NewLine + entity.PublishedOn.ToString()
+            + Environment.NewLine + entity.User.Image.ToString());
+
+            return Json(new
+            {
+                UserName,
+                CommentText,
+                entity.PublishedOn,
+                entity.User.Image
+                
+            });
         }
     }
 }
