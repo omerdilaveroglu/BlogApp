@@ -37,14 +37,14 @@ namespace BlogApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var isUser = _userRepository.Users.FirstOrDefault(x => x.Email == model.Email
-                                                                        && x.Password == model.Password);
+                    var isUser = _userRepository.Users.FirstOrDefault(x => x.Email == model.Email && x.Password == model.Password);
                     if (isUser != null)
                     {
                         var userClaims = new List<System.Security.Claims.Claim>();
                         userClaims.Add(new Claim(ClaimTypes.NameIdentifier, isUser.UserId.ToString()));
                         userClaims.Add(new Claim(ClaimTypes.Name, isUser.UserName ?? ""));
                         userClaims.Add(new Claim(ClaimTypes.GivenName, isUser.Name ?? ""));
+                        userClaims.Add(new Claim(ClaimTypes.UserData, isUser.Image ?? ""));
 
                         if (isUser.Email == "omer@omer.com")
                         {

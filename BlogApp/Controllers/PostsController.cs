@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Security.Claims;
 using BlogApp.Data.Abstract;
 using BlogApp.Entity;
 using BlogApp.Model;
@@ -26,7 +27,7 @@ namespace BlogApp.Controllers
         {
 
             var claims = User.Claims;
-            
+
             if (!string.IsNullOrEmpty(tag))
             {
                 var taggedPosts = await _postRepository.Items
@@ -67,31 +68,29 @@ namespace BlogApp.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddComment(int PostId, string UserName, string CommentText)
+        public JsonResult AddComment(int PostId, string CommentText)
         {
-            User newUser = new User { UserName = UserName, Image = "1.jpg" };
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userName = User.FindFirstValue(ClaimTypes.Name);
+            var image = User.FindFirstValue(ClaimTypes.UserData);
 
             Comment entity = new Comment
             {
                 CommentText = CommentText,
                 PublishedOn = DateTime.Now,
                 PostId = PostId,
-                User = newUser
+                UserId = int.Parse(userId ?? ""),
             };
 
             _commentRepository.Add(entity);
 
-            Console.WriteLine(entity.User.UserName.ToString()
-            + Environment.NewLine + entity.CommentText.ToString() + Environment.NewLine + entity.PublishedOn.ToString()
-            + Environment.NewLine + entity.User.Image.ToString());
-
             return Json(new
             {
-                UserName,
+                userName,
                 CommentText,
                 entity.PublishedOn,
-                entity.User.Image
-                
+                image
+
             });
         }
     }

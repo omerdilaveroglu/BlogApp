@@ -5,12 +5,12 @@
         <div class="bg-white p-4">
             <h1 class="h4 mb4">
                 @Model.Title
-            <div class="tags">
-                @foreach(var tag in Model.Tags){
-                <a href="/posts/tag/@tag.Url"
-                    class="badge bg-@tag.Color bg-opacity-10 text-@tag.Color mb-2 fw-bold">@tag.Text</a>
-                }
-            </div>
+                <div class="tags">
+                    @foreach(var tag in Model.Tags){
+                    <a href="/posts/tag/@tag.Url"
+                        class="badge bg-@tag.Color bg-opacity-10 text-@tag.Color mb-2 fw-bold">@tag.Text</a>
+                    }
+                </div>
         </div>
         <img src="~/img/@Model.Image" class="img-fluid rounded" alt="">
         <div>
@@ -42,15 +42,12 @@
                         <h4 class="mb-4 text-center text-secondary">
                             <i class="bi bi-chat-text-fill me-2"></i> Yorum Ekle
                         </h4>
+
+                        @if (User.Identity!.IsAuthenticated){
                         <hr class="mb-4">
 
                         <form action="/posts/AddComment" method="post">
                             <input type="hidden" id="PostId" name="PostId" value="@Model.PostId" />
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="UserName" name="UserName"
-                                    placeholder="Adınız" required>
-                                <label for="UserName">Kullanıcı Adınız</label>
-                            </div>
 
                             <div class="form-floating mb-4">
                                 <textarea class="form-control" id="CommentText" name="CommentText"
@@ -68,6 +65,11 @@
                                 Yorumunuz yayınlanmadan önce onaylanabilir.
                             </p>
                         </form>
+                        }
+                        else{
+                            <p>Yorum için uygulamaya giriş yapmalısınız. <a href="/users/login">Login</a></p>
+                        }
+
                     </div>
                 </div>
             </div>
@@ -91,13 +93,12 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#commentSave").click(function (e) {
-                $.ajax({
+            $.ajax({
                 type: "POST",
                 url: '@Url.Action("AddComment", "Posts")',
                 dataType: "json",
                 data: {
                     PostId: $("#PostId").val(),
-                    UserName: $("#UserName").val(),
                     CommentText: $("#CommentText").val()
                 },
                 success: function (comment) {
