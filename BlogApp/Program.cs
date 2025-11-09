@@ -6,7 +6,8 @@ using Pomelo.EntityFrameworkCore.MySql.Infrastructure; // MySQL için eklendi
 using System; 
 using BlogApp.Data;
 using BlogApp.Data.Concrete;
-using BlogApp.Entity; // SeedData için gerekli
+using BlogApp.Entity;
+using Microsoft.AspNetCore.Authentication.Cookies; // SeedData için gerekli
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,10 +32,15 @@ builder.Services.AddDbContext<BlogContext>(options =>
 builder.Services.AddScoped<IRepository<Post>, EfRepository<Post, BlogContext>>();
 builder.Services.AddScoped<IRepository<Tag>, EfRepository<Tag, BlogContext>>();
 builder.Services.AddScoped<IRepository<Comment>, EfRepository<Comment, BlogContext>>();
+builder.Services.AddScoped<IUserRepository, EfUserRepository>();
 
-
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
 var app = builder.Build();
+
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 
 // Veri doldurma (Seeding)
 // Not: SeedData.TestVerileriniDoldur metodu, IPostDal'a bağımlı olabilir.

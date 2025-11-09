@@ -3164,11 +3164,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/BlogApp.csproj",
+      "projectUniqueName": "/Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/BlogApp/BlogApp.csproj",
       "projectName": "BlogApp",
-      "projectPath": "/Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/BlogApp.csproj",
+      "projectPath": "/Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/BlogApp/BlogApp.csproj",
       "packagesPath": "/Users/omerd/.nuget/packages/",
-      "outputPath": "/Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/obj/",
+      "outputPath": "/Users/omerd/Desktop/Projeler/DotNet/BlogApp/BlogApp/BlogApp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/omerd/.nuget/NuGet/NuGet.Config"

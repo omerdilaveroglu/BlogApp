@@ -25,6 +25,8 @@ namespace BlogApp.Controllers
         public async Task<IActionResult> Index(string? tag)
         {
 
+            var claims = User.Claims;
+            
             if (!string.IsNullOrEmpty(tag))
             {
                 var taggedPosts = await _postRepository.Items
